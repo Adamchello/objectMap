@@ -1,18 +1,18 @@
-interface entriesReduce {
+interface entriesReduce<T> {
     acc: object;
-    entry: string | number | boolean[][];
+    entry: Array<Array<T>>;
     idx: number;
-    self: string | number | boolean[][];
+    self: Array<Array<T>>;
   }
   
-  interface resultTypes extends entriesReduce {
+  interface resultTypes<T> extends entriesReduce<T> {
     callback: () => object;
   }
   
-  export function objectMap(this: object, callback): object {
+  export function objectMap<T>(this: object, callback): object {
     const entries: string[][] = (<any>Object).entries(this);
-    return entries.reduce((acc, entry, idx, self): entriesReduce => {
-      const result: resultTypes = {
+    return entries.reduce((acc, entry, idx, self): entriesReduce<T> => {
+      const result: resultTypes<T> = {
         ...acc,
         ...callback(entry, idx, self),
       };
