@@ -10,6 +10,9 @@ declare global {
 
 Object.prototype.map = mapper;
 
+
+
+
 describe("function map", () => {
   it("test 1: should return object with given value if key was found", () => {
     const exampleObject = {
@@ -22,7 +25,7 @@ describe("function map", () => {
     const oldName = "Anne";
     const newName = "Eve";
 
-    const result: any = exampleObject.map(([key, value]: any) => {
+    const result = exampleObject.map(([key, value]: any) => {
       if (value === oldName) {
         return { [key]: newName };
       }
@@ -48,7 +51,9 @@ describe("function map", () => {
       }
       return {};
     });
-    expect(Object.keys(result)[0]).toBe(newKey);
+
+
+    expect(Object.keys(result).filter(el=>el === newKey)).toBe([newKey]);
   });
 
   it("test 3: should return object with given two values if key was found", () => {
